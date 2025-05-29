@@ -1,0 +1,10 @@
+# @package __global__
+
+datasource:
+  max_sample_rate: 32000
+  max_channels: 1
+
+  train: C:/Users/Zhang/Desktop/assignment2/audiocraft/dataset/music/data.jsonl
+  valid: C:/Users/Zhang/Desktop/assignment2/audiocraft/dataset/music/data.jsonl
+  evaluate: null
+  generate: C:/Users/Zhang/Desktop/assignment2/audiocraft/dataset/music/data.jsonl

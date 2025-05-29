@@ -7,9 +7,22 @@
 """
 Provides cluster and tools configuration across clusters (slurm, dora, utilities).
 """
-
-import logging
 import os
+# ----- Windows 平台补丁，防止 os.uname() 不存在报错 -----
+try:
+    # 如果 uname 存在且可用，就不打补丁
+    _ = os.uname()
+except AttributeError:
+    from collections import namedtuple
+    # 定义一个简单的具名元组，字段名必须和 cluster.py 里访问的一致
+    Uname = namedtuple("uname", ["sysname", "nodename", "release", "version", "machine"])
+    # 返回一个所有字段都填 Windows 相关或空串的实例
+    os.uname = lambda: Uname(sysname="Windows",
+                              nodename=os.environ.get("COMPUTERNAME", ""),
+                              release="",
+                              version="",
+                              machine="")
+import logging
 from pathlib import Path
 import re
 import typing as tp
