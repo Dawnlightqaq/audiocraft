@@ -9,7 +9,7 @@ defaults:
   - override /dset: audio/my_piano_collection
   - _self_
 
-continue_from: '//pretrained/facebook/musicgen-medium'
+continue_from: '//pretrained/facebook/musicgen-small'
 
 autocast: true
 autocast_dtype: float16
@@ -37,11 +37,11 @@ generate:
     use_sampling: true
     top_k: 250
     top_p: 0.0
-  every: 50 # Generate samples every 50 epochs (adjust as needed)
+  every: 1 # Generate samples every 50 epochs (adjust as needed)
   output_dir: null
 
 optim:
-  epochs: 100
+  epochs: 2
   optimizer: dadam
   lr: 1e-5
   ema:
@@ -55,7 +55,7 @@ logging:
 schedule:
   lr_scheduler: cosine
   cosine:
-    warmup: 200
+    warmup: 20
     lr_min_ratio: 0.0
     cycle_length: 1.0
 xp:
