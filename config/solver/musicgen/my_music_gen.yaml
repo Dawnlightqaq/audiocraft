@@ -30,24 +30,31 @@ dataset:
   batch_size: 2  # 32 GPUs
   num_workers: 4
   sample_on_weight: false  # Uniform sampling all the way
-  sample_on_duration: false  # Uniform sampling all the way
+  sample_on_duration: 30.0  # Uniform sampling all the way
+  valid:
+    num_samples: 200
+
 
 generate:
   lm:
     use_sampling: true
-    top_k: 250
+    temperature: 0.7
+    top_k: 100
     top_p: 0.0
   every: 1 # Generate samples every 50 epochs (adjust as needed)
   output_dir: null
 
 optim:
-  epochs: 2
+  epochs: 1
+  updates_per_epoch: 100
   optimizer: dadam
   lr: 1e-5
   ema:
     use: true
     updates: 10
     device: cuda
+
+
 
 logging:
   log_tensorboard: true
